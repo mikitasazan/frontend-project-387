@@ -15,5 +15,4 @@ jobs:
       - uses: googleapis/release-please-action@v4
         with:
           release-type: node
-          package-name: calendar-calls-project-387
           token: ${{ secrets.GITHUB_TOKEN }}
