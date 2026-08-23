@@ -1,0 +1,7 @@
+{
+  "name": "calendar-calls-project-387",
+  "private": true,
+  "type": "module",
+  "scripts": {"build":"tsc","start":"node dist/server.js","dev":"tsx src/server.ts","test":"node --test","lint":"tsc --noEmit"},
+  "dependencies": {"@types/node":"^22.0.0","typescript":"^5.9.0","tsx":"^4.19.0"}
+}
