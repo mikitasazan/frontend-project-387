@@ -1,0 +1,36 @@
+name: lighthouse
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Start calendar
+        run: npm run dev > /tmp/calendar.log 2>&1 &
+      - name: Wait for calendar
+        run: npx --yes wait-on http://127.0.0.1:3000
+      - name: Run Lighthouse
+        run: |
+          mkdir -p artifacts
+          npx --yes lighthouse http://127.0.0.1:3000 \
+            --output html \
+            --output-path artifacts/lighthouse.html \
+            --chrome-flags="--headless --no-sandbox"
+      - name: Upload Lighthouse report
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-report
+          path: artifacts/lighthouse.html
