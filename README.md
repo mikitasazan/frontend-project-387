@@ -6,6 +6,30 @@
 Это продолжение проекта «Календарь звонков». Базовое приложение перенесено из
 предыдущего репозитория и запускается в Docker.
 
+## Стек
+
+TypeScript, Node.js (встроенный `http`, без фреймворка), статика на `public/`.
+
+## Установка и запуск
+
+```bash
+npm install
+npm run build
+npm start
+```
+
+Приложение открывается на `http://localhost:3000`.
+
+Для разработки — `npm run dev` (через `tsx`, без сборки). Тесты — `npm test`
+(`node --test`).
+
+Через Docker:
+
+```bash
+docker build -t calendar-calls .
+docker run -p 3000:3000 calendar-calls
+```
+
 ## План развития
 
 ### Новые возможности
